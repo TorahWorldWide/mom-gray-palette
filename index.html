@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>בחירת אפור לאמא</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#f4f4f2;color:#222;padding:16px}
+h1{font-size:24px;margin:4px 0 6px}p.lead{font-size:17px;line-height:1.5;margin:0 0 14px}
+h2{font-size:19px;margin:22px 0 8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.t{border-radius:16px;padding:14px;min-height:150px;cursor:pointer;position:relative;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.num{font-size:34px;font-weight:800;line-height:1}.hex{font-size:13px;opacity:.75;margin-top:2px;font-family:monospace}
+.btn{margin-top:14px;background:#fff;color:#222;border-radius:10px;padding:10px;font-size:18px;font-weight:700;text-align:center}
+.tag{position:absolute;top:10px;left:10px;font-size:12px;background:#e5b567;color:#222;border-radius:8px;padding:2px 7px;font-weight:700}
+#big{display:none;position:fixed;inset:0;padding:24px;flex-direction:column;justify-content:center;gap:16px}
+#big .num{font-size:72px}#big .btn{font-size:24px;padding:18px}
+#big .close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.9);color:#222;border:0;border-radius:12px;font-size:18px;padding:10px 16px;font-weight:700}
+</style></head><body>
+<h1>איזה אפור את אוהבת?</h1>
+<p class="lead">כל ריבוע הוא גוון אפור עם מספר. לחיצה על ריבוע מראה אותו על כל המסך.<br>תבחרי אחד ותגידי לתומר את <b>המספר</b>.</p>
+<div id="ref"></div>
+<h2>אפור נקי</h2><div class="grid" id="neutral"></div>
+<h2>אפור חם (כמו בעיצוב 15, קצת חום)</h2><div class="grid" id="warm"></div>
+<div id="big"><button class="close" onclick="big.style.display='none'">סגור ✕</button><div class="num"></div><div class="hex"></div><div class="btn">מלאי</div><div class="btn">הזמנות</div></div>
+<script>
+const neutral=['#363636','#3f3f3f','#484848','#515151','#5a5a5a','#646464','#6e6e6e','#787878','#838383','#8e8e8e'];
+const warm=['#363532','#3f3e3b','#484744','#51504d','#5b5956','#65635f','#6f6d69','#7a7873','#85837e','#908e89'];
+function lum(h){const n=parseInt(h.slice(1),16);return((n>>16)*.299+((n>>8)&255)*.587+(n&255)*.114)/255}
+function tile(hex,num,tag){const fg=lum(hex)>.5?'#1a1a1a':'#fff';const d=document.createElement('div');d.className='t';d.style.background=hex;d.style.color=fg;
+d.innerHTML=(tag?'<span class="tag">'+tag+'</span>':'')+'<div class="num">'+num+'</div><div class="hex">'+hex+'</div><div class="btn">מלאי</div>';
+d.onclick=()=>{big.style.background=hex;big.style.color=fg;big.querySelector('.num').textContent=num;big.querySelector('.hex').textContent=hex;big.style.display='flex'};return d}
+const r=document.createElement('div');r.className='grid';r.appendChild(tile('#2b2a28','עכשיו','עיצוב 15 — כהה מדי'));ref.appendChild(r);
+neutral.forEach((h,i)=>document.getElementById('neutral').appendChild(tile(h,i+1)));
+warm.forEach((h,i)=>document.getElementById('warm').appendChild(tile(h,i+11)));
+</script></body></html>
