@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 עיצובים על האפור של אמא</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#908e89;color:#1a1a1a;padding:16px}
+h1{font-size:24px;margin:4px 0 6px}p.lead{font-size:17px;line-height:1.5;margin:0 0 16px}
+.opt{background:#fff;border-radius:18px;padding:14px 0 14px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.opt h2{font-size:22px;margin:0 14px 2px;display:flex;align-items:center;gap:10px}
+.opt h2 .n{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;font-size:22px;font-weight:800}
+.opt .sub{font-size:15px;color:#444;margin:0 14px 10px}
+.row{display:flex;gap:10px;overflow-x:auto;padding:0 14px 6px;scroll-snap-type:x mandatory}
+.row figure{margin:0;flex:none;width:62%;scroll-snap-align:start}
+.row img{width:100%;border-radius:12px;border:1px solid #ddd;display:block;cursor:zoom-in}
+.row figcaption{font-size:14px;text-align:center;color:#444;margin-top:4px}
+#big{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9;overflow:auto;padding:12px}
+#big img{width:100%;max-width:520px;display:block;margin:50px auto 0;border-radius:12px}
+#big button{position:fixed;top:12px;right:12px;font-size:18px;font-weight:700;padding:10px 16px;border:0;border-radius:12px;background:#fff}
+</style></head><body>
+<h1>5 עיצובים על האפור שבחרת</h1>
+<p class="lead">כולם על האפור שלך (מספר 20), עם כותרת בתכלת או בירוק וכפתורים גדולים. כל עיצוב לקוח מחברה גדולה.<br>גוללים הצידה כדי לראות עוד מסכים, ולחיצה על תמונה מגדילה אותה.<br>תגידי לתומר את <b>המספר</b> שאהבת.</p>
+<div id="list"></div>
+<div id="big" onclick="this.style.display='none'"><button>סגור ✕</button><img></div>
+<script>
+const O=[
+ [18,'תכלת','בסגנון אפל','#2997ff','#fff'],
+ [19,'תכלת רך','בסגנון Meta (פייסבוק)','#c8e4e8','#1c2b33'],
+ [20,'ירוק עמוק','בסגנון סטארבקס','#00754a','#fff'],
+ [21,'ירוק בוהק','בסגנון WeChat','#07c160','#fff'],
+ [22,'ירוק ליים','בסגנון Wise','#9fe870','#163300']];
+const V=[['inventory','מלאי'],['orders','הזמנות'],['shortages','חוסרים'],['recipes','מתכונים']];
+O.forEach(([t,name,sub,c,fg],i)=>{const d=document.createElement('div');d.className='opt';
+ d.innerHTML=`<h2><span class="n" style="background:${c};color:${fg}">${i+1}</span>${name}</h2><div class="sub">${sub}</div><div class="row">`+
+ V.map(([v,l])=>`<figure><img loading="lazy" src="designs/t${t}-${v}.png" alt="${l}"><figcaption>${l}</figcaption></figure>`).join('')+'</div>';
+ list.appendChild(d)});
+document.addEventListener('click',e=>{if(e.target.matches('.row img')){big.querySelector('img').src=e.target.src;big.style.display='block'}});
+</script></body></html>
